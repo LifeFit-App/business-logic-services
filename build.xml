@@ -98,10 +98,9 @@ Notes:
                 </fileset>
             </copy-->
         </target>   
-    	<target name="execute.lifefitclient" depends="compile"> <!--depends="install, compile"-->
-            <echo message="ant execute.lifefitclient com.lifefit.soap.client.LifeFitClient in ${build.dir}" />
-        	<!--record name="client-server.log" action="start" append="false"/-->
-        	<java classname="com.lifefit.soap.client.LifeFitClient" classpath="${build.dir}" fork="true">
+    	<target name="start" depends="compile">
+            <echo message="app start com.lifefit.rest.LifeFitApp in ${build.dir}" />
+            <java classname="com.lifefit.rest.LifeFitApp" classpath="${build.dir}" fork="true">
                 <arg value="$JAVA_OPTS  -cp" />
                 <classpath>
                     <path location="build" />
@@ -111,8 +110,7 @@ Notes:
                     </fileset>
                 </classpath>
             </java>
-        	<!--record name="client-server.log" action="stop"/-->
-        </target> 
+        </target>
     	<target name="compile">
             <echo message="Compile target has been called"/>
             <javac srcdir="src" destdir="${build.dir}" classpathref="lib.path.id" includeAntRuntime="false"/>   

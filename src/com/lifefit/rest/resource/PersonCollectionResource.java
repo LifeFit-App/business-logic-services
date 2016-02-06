@@ -49,14 +49,14 @@ public class PersonCollectionResource {
     }
     
     @PUT
-    @Path("{personId}/goal/{measureName}")
+    @Path("{personId}/goal/{measureType}")
     @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     public Response updatePersonGoal(Goal goal, @PathParam("personId") int personId, 
-    		@PathParam("measureName") String measureName){
+    		@PathParam("measureType") String measureType){
     	Response res;
     	LifeFitSSClient client = new LifeFitSSClient();
     	
-    	if(client.updatePersonGoal(goal, personId, measureName)){
+    	if(client.updatePersonGoal(goal, personId, measureType)){
     		res = Response.created(uriInfo.getAbsolutePath()).build();   
     	}
     	else
@@ -69,11 +69,11 @@ public class PersonCollectionResource {
     @Path("{personId}/hp/{measureType}")
     @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     public Response savePersonHealthMeasure(LifeStatus lifeStatus, @PathParam("personId") int personId,
-    		@PathParam("measureName") String measureName){
+    		@PathParam("measureType") String measureType){
     	Response res;
     	LifeFitSSClient client = new LifeFitSSClient();
     	
-    	if(client.savePersonHealthMeasure(lifeStatus, personId, measureName)){
+    	if(client.savePersonHealthMeasure(lifeStatus, personId, measureType)){
     		res = Response.created(uriInfo.getAbsolutePath()).build();   
     	}
     	else
@@ -91,4 +91,25 @@ public class PersonCollectionResource {
     	return person;
     }
     
+    @GET
+    @Path("{personId}/goal/status")
+    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    public String checkDailyGoalStatus(@PathParam("personId") int personId) {
+    	
+    	LifeFitSSClient client = new LifeFitSSClient();
+    	
+    	String dailyGoalStatus = client.checkDailyGoalStatus(personId);
+        return dailyGoalStatus;
+    }    
+    
+    @GET
+    @Path("{personId}/goal")
+    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    public Goal getPersonGoal(@PathParam("personId") int personId) {
+    	
+    	LifeFitSSClient client = new LifeFitSSClient();
+    	
+    	Goal personGoal = client.getPersonGoal(personId);
+        return personGoal;
+    } 
 }

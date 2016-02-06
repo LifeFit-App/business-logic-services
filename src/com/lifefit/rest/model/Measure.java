@@ -7,6 +7,9 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Measure implements Serializable{
@@ -17,7 +20,7 @@ public class Measure implements Serializable{
 	@XmlElement
 	private String measureName;
 	@XmlElement
-	private String measureType;
+	private String measureType;	
 	
 	public Measure(){}
 	

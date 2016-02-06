@@ -1,7 +1,6 @@
 package com.lifefit.rest.model;
 
 import java.io.Serializable;
-import java.util.Date;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -18,7 +17,7 @@ public class HealthMeasureHistory implements Serializable {
 	@XmlElement
 	private double value;
 	@XmlElement
-	private Date datetime;
+	private String datetime;
 	@XmlElement
 	private Measure measure;
 	@XmlElement
@@ -42,11 +41,11 @@ public class HealthMeasureHistory implements Serializable {
 		this.value = value;
 	}
 
-	public Date getDatetime() {
+	public String getDatetime() {
 		return datetime;
 	}
 
-	public void setDatetime(Date datetime) {
+	public void setDatetime(String datetime) {
 		this.datetime = datetime;
 	}
 
