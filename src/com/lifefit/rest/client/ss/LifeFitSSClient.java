@@ -134,12 +134,13 @@ public class LifeFitSSClient {
 		
 				//update existing lifeStatus with new value
 				currentLifeStatus.setValue(lifeStatus.getValue());
+				currentLifeStatus.setPerson(person);
 				response = service.path("person/"+personId+"/hp").request(MediaType.APPLICATION_JSON)
 						.put(Entity.entity(currentLifeStatus, MediaType.APPLICATION_JSON), Response.class);
 				httpStatus = response.getStatus();
 			}
 			else{
-				//Create a new LifeStatus for the given personId				
+				//Create a new LifeStatus for the given personId and measureType				
 				response = service.path("person/"+personId+"/hp").request(MediaType.APPLICATION_JSON)
 						.post(Entity.entity(lifeStatus, MediaType.APPLICATION_JSON), Response.class);
 				httpStatus = response.getStatus();
